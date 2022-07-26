@@ -1,0 +1,35 @@
+  1  yum install vim net-tools bash-completion -y
+    2  wget https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/latest-4.6/openshift-client-linux-4.6.59.tar.gz
+    3  wget https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/latest-4.6/openshift-install-linux-4.6.59.tar.gz
+    4  mkdir openshift/test -p
+    5  ls
+    6  tar xzvf openshift-client-linux-4.6.59.tar.gz
+    7  tar xzvf openshift-install-linux-4.6.59.tar.gz
+    8  cp  oc  /usr/bin/
+    9  cp openshift-install openshift/
+   10  cd openshift/
+   11  ssh-keygen
+   12  eval "$(ssh-agent -s)"
+   13  ssh-add  /root/.ssh/id_rsa
+   14  ./openshift-install  create install-config  --dir test/   --log-level debug
+   15  cd test/
+   16  ls
+   17  cp install-config.yaml   /root/
+   18  vim install-config.yaml
+   19  cp install-config.yaml   /root/
+   20  cd ..
+   21  ls
+   22  ./openshift-install  create cluster --dir test/ --log-level debug
+   23  vim test/install-config.yaml
+   24  ./openshift-install  create cluster --dir test/ --log-level debug
+   25  ./openshift-install  delete cluster --dir test/ --log-level debug
+   26  ./openshift-install  destroy cluster --dir test/ --log-level debug
+   27  ./openshift-install  create cluster --dir test/ --log-level debug
+   28  cp /root/install-config.yaml  test/
+   29  ./openshift-install  create cluster --dir test/ --log-level debug
+   30  vim test/install-config.yaml
+   31  ./openshift-install  create cluster --dir test/ --log-level debug
+   32  ls
+   33  cd test/
+   34  s
+

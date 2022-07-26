@@ -1,0 +1,51 @@
+apiVersion: v1
+baseDomain: openshiftlabs.xyz
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform: 
+    aws:
+      rootVolume:
+        iops: 200
+        size: 40
+        type: io1
+      type: t3a.xlarge
+      zones:
+      - ap-south-1a
+      - ap-south-1b
+  replicas: 5
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform: 
+     aws:
+      zones:
+      - ap-south-1b
+      - ap-south-1c
+      rootVolume:
+        iops: 200
+        size: 40
+        type: io1
+      type: t3a.xlarge
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: labs
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/16
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  aws:
+    region: ap-south-1
+publish: External
+pullSecret: '{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K21kaGFjazAzMTYxbGo1dnZ4cXo4ZW1iN2RxcXh4ZHlpaXoydHc6SDROOVoySDBKWTNGMFVOUTNXUkFCR0UzU09VV0U3Rk02RkQ2MEE3SEgxRlRRMUtVSTc4QUEwQldSSDlJVEhTVw==","email":"mayank123modi@gmail.com"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K21kaGFjazAzMTYxbGo1dnZ4cXo4ZW1iN2RxcXh4ZHlpaXoydHc6SDROOVoySDBKWTNGMFVOUTNXUkFCR0UzU09VV0U3Rk02RkQ2MEE3SEgxRlRRMUtVSTc4QUEwQldSSDlJVEhTVw==","email":"mayank123modi@gmail.com"},"registry.connect.redhat.com":{"auth":"NTE5NTE0ODF8dWhjLTFMajVWdnhRejhlbWI3ZFFxWHhkeUlpWjJUVzpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSXpZakEzWldFM1pUQmxOalUwTTJRMk9ESXlOV014TjJJeE5qVTFPRFV5TVNKOS5RZ2VNbF9tUXB3LVFMT0ZCQnFpejRRVl9ZODRkMDBOUGpzNVdSSEQybUV0cl90bG9abG5sVjdLX3BaLS1DVy1paXBpREtYbERXYk1HeVR0SmUwM3htZXhTb25lYnFWSkxuT3p5ODBZUEUxVmozVFZIb1hrazFQTFR3UFVXSzFYTUZmNDFINENTbW5XcGRuTXRfVllBbmpKazU4cFZsSGs5TmxydWYwYW9jaC1GNkVMOFQ4ZEM0OUxGQ2VlSkJZYkFCS0tUckpHX0paMGJ2dU5CdFp6ZVBwdDNybTNTWmVUVUp2UHVZMWlWUkdUUkFjZXVqNVNLOER5TVh3MmluNnJSbXJ6VzRFSTJnMktmRkY4QmhQaDExWXZEdDh1T0x1THl2aUVkajlYNnlkcUtyYzJFNXhkQjJaLVBDd1I1cVBpXzB4VGozRElXV0dCS0haNmxxVkY1TGhCajR6eW9Vak54RlJERnZuY3pQX2hKcHJXZ2J2QjIweEVEc2psb0hZSkpYT1Qza3FsaEdrV0MtWGoyMHMzdjVjMFh2bkZieW1xSWswbmdteWl4bDVXYU9pV2VjN2pYN0VwMjJzUGl1ck5rTzZ3NFNCLWdsYUlFOVlKejNsRFJDS01aa3J6QXJPdV96eHFqVlJUd01TRUpYRGxhbFBkRGVFRW4zV05iZElhRVRzRGhhWFJYbmtoMzNRekJ3enkzT0l5RFA1SUlSNFAyX3B5Z1VDcW5QN0x1b1lsRlFSYkx3eWZTdXU0ai1CUVU0MElTNHZhcWxWQXd4NWk5ZDJhSTBtV0szTEtRZVNlVjd3LXdkeW5tNm1Lbmg3UHhRal9NZXJOUjVzdU11ZzVfTDFpY2h3d3Y5U2FwelVZQ3d2b1V6V2daazJDMHpZZmFlNWhOejZMdkRqSQ==","email":"mayank123modi@gmail.com"},"registry.redhat.io":{"auth":"NTE5NTE0ODF8dWhjLTFMajVWdnhRejhlbWI3ZFFxWHhkeUlpWjJUVzpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSXpZakEzWldFM1pUQmxOalUwTTJRMk9ESXlOV014TjJJeE5qVTFPRFV5TVNKOS5RZ2VNbF9tUXB3LVFMT0ZCQnFpejRRVl9ZODRkMDBOUGpzNVdSSEQybUV0cl90bG9abG5sVjdLX3BaLS1DVy1paXBpREtYbERXYk1HeVR0SmUwM3htZXhTb25lYnFWSkxuT3p5ODBZUEUxVmozVFZIb1hrazFQTFR3UFVXSzFYTUZmNDFINENTbW5XcGRuTXRfVllBbmpKazU4cFZsSGs5TmxydWYwYW9jaC1GNkVMOFQ4ZEM0OUxGQ2VlSkJZYkFCS0tUckpHX0paMGJ2dU5CdFp6ZVBwdDNybTNTWmVUVUp2UHVZMWlWUkdUUkFjZXVqNVNLOER5TVh3MmluNnJSbXJ6VzRFSTJnMktmRkY4QmhQaDExWXZEdDh1T0x1THl2aUVkajlYNnlkcUtyYzJFNXhkQjJaLVBDd1I1cVBpXzB4VGozRElXV0dCS0haNmxxVkY1TGhCajR6eW9Vak54RlJERnZuY3pQX2hKcHJXZ2J2QjIweEVEc2psb0hZSkpYT1Qza3FsaEdrV0MtWGoyMHMzdjVjMFh2bkZieW1xSWswbmdteWl4bDVXYU9pV2VjN2pYN0VwMjJzUGl1ck5rTzZ3NFNCLWdsYUlFOVlKejNsRFJDS01aa3J6QXJPdV96eHFqVlJUd01TRUpYRGxhbFBkRGVFRW4zV05iZElhRVRzRGhhWFJYbmtoMzNRekJ3enkzT0l5RFA1SUlSNFAyX3B5Z1VDcW5QN0x1b1lsRlFSYkx3eWZTdXU0ai1CUVU0MElTNHZhcWxWQXd4NWk5ZDJhSTBtV0szTEtRZVNlVjd3LXdkeW5tNm1Lbmg3UHhRal9NZXJOUjVzdU11ZzVfTDFpY2h3d3Y5U2FwelVZQ3d2b1V6V2daazJDMHpZZmFlNWhOejZMdkRqSQ==","email":"mayank123modi@gmail.com"}}}'
+sshKey: |
+  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDALIAPMqW0evnN1guQ+YI+rb1GKewPzeGfdqCjv7W4o2MqLXV/CejXqBVNcdE7jQihdsXz1Wg2O9h4SyjiDVLWVbMgchlp5LRvlwedDhTNseoZkmAa9n45/MtExGCUgDBkDi8F5PgHx1523SegBo84xnZkasEyh8EOGOzyYZxMSORQXYq1mLA674OAfpragPmE18yNrpovqSuPbVaSIg6yATgiR+tVDczYaEMCP3iVgSmhUNiNpd3+oMlPpJoufPmHweHZzFJk/76fbJWlsH6Wy2idSNjwp3Q+leikz3lLsgr0MLzIc0Yl965Yx0nHXEj0izd2rJ+z66HZE2/Da4Dt root@ip-172-31-0-177.ap-south-1.compute.internal
